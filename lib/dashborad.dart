@@ -7,7 +7,8 @@ import 'package:appstest/style/colors.dart';
 
 
 class dashboard extends StatefulWidget {
-  const dashboard ({super.key});
+  String name ;
+  dashboard ({super.key,required this.name});
 
   @override
   State<dashboard> createState() => _dashboardState();
@@ -49,12 +50,12 @@ class _dashboardState extends State<dashboard> {
                           Colors.transparent),
                     ),
                     icon: const Icon(Iconsax.menu_1,color: colorApp.colorPrimary,)),
-                const Row(
+                 Row(
                   children: [
 
-                    Icon(Iconsax.location,color: colorApp.colorPrimary),
-                    SizedBox(width: 10),
-                    Text('Agadir, Morocco',style: TextStyle(
+                    const Icon(Iconsax.location,color: colorApp.colorPrimary),
+                    const SizedBox(width: 10),
+                    Text('Welcome back ${widget.name} !',style: const TextStyle(
                       color: colorApp.colorPrimary,
                       fontFamily: 'Poppins-Regular',
                       fontSize: 16,
@@ -131,12 +132,14 @@ class _dashboardState extends State<dashboard> {
                     ],
                   ),
                   SizedBox(
-                    height: 210,
+                    height: 250,
                     child: Container(
                       child: ListView.builder(
                         shrinkWrap: true,
+                        padding: EdgeInsets.symmetric(vertical: 20),
                         itemCount: itemsPlaces.length,
                         scrollDirection: Axis.horizontal,
+
                         itemBuilder: (context,i)
                         {
                           return Container(
@@ -147,20 +150,21 @@ class _dashboardState extends State<dashboard> {
                               borderRadius: BorderRadius.circular(15),
                               color: colorApp.colorBackground,
                               boxShadow: const [
-                            BoxShadow(
-                            color: Colors.grey,
-                              offset: const Offset(
-                                1.0,
-                                1.0),
-                              blurRadius: 3.0,
-                              spreadRadius: 1.0,
-                            ), //BoxShadow
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: const Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ), //BoxShadow
+                                BoxShadow(
+                                  color: CupertinoColors.systemGrey,
+                                  offset: Offset(
+                                    5.0,
+                                    5.0,
+                                  ),
+                                  blurRadius: 15.0,
+                                  spreadRadius: 1.0,
+                                ), //BoxShadow
+                                BoxShadow(
+                                  color: Colors.white,
+                                  offset:  Offset(0.0, 0.0),
+                                  blurRadius: 0.0,
+                                  spreadRadius: 0.0,
+                                ), //BoxShadow
                             ], //BoxDecoration
                             ),
                             margin: const EdgeInsets.all(6),
@@ -243,79 +247,91 @@ class _dashboardState extends State<dashboard> {
                     height: 25,
                   ),
                   ////////////////////
-                  for(var i in itemsPlaces )
-                       Container(
-                         margin: const EdgeInsets.only(bottom: 10,left: 15,right: 15),
-                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: CupertinoColors.systemGrey,
-                              offset: Offset(
-                                5.0,
-                                5.0,
-                              ),
-                              blurRadius: 25.0,
-                              spreadRadius: 1.0,
-                            ), //BoxShadow
-                            BoxShadow(
-                              color: Colors.white,
-                              offset:  Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ), //BoxShadow
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
+                  ListView.builder(
+                    itemCount: 6,
+                    shrinkWrap: true,
+                    physics: ScrollPhysics(),
 
-                              child: Stack(
-                                children: [
-                                  Container(
+                    itemBuilder: (BuildContext context, int index) {
+                    return  Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(bottom: 10,left: 15,right: 15),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: CupertinoColors.systemGrey,
+                            offset: Offset(
+                              5.0,
+                              5.0,
+                            ),
+                            blurRadius: 25.0,
+                            spreadRadius: 1.0,
+                          ), //BoxShadow
+                          BoxShadow(
+                            color: Colors.white,
+                            offset:  Offset(0.0, 0.0),
+                            blurRadius: 0.0,
+                            spreadRadius: 0.0,
+                          ), //BoxShadow
+                        ],
+                      ),
+                      child: Stack(
+
+                        children: [
+                          Container(
+                            child: Stack(
+                              children: [
+                                Container(
+
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(15),bottomLeft: Radius.circular(15)),
                                     child: const Image(image: AssetImage("assets/images/img_2.png"),
-                                        width: 188,
-                                        height: 162
+                                      width: 182,
+                                      height: 162,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                  Positioned(
-                                    right: 0,
-                                    child: Container(
-                                      decoration: const BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment.centerLeft,
-                                          end: Alignment.centerRight,
-                                          colors: <Color>[
-                                            Color(0x1afcfcfc),
-                                            colorApp.colorBackground,
-                                            colorApp.colorBackground
-                                          ], // Gradient from https://learnui.design/tools/gradient-generator.html
-                                          tileMode: TileMode.mirror,
-                                        ),
+                                ),
+                                Positioned(
+                                  right: 0,
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        colors: <Color>[
+                                          Color(0x100FFFFFF),
+                                          Colors.white,
+                                          Colors.white
+                                        ], // Gradient from https://learnui.design/tools/gradient-generator.html
+                                        tileMode: TileMode.mirror,
                                       ),
-                                      width: 40,
-                                      height: 162,
                                     ),
-                                  )
-                                ],
-                              ),
+                                    width: 76,
+                                    height: 162,
+                                  ),
+                                )
+                              ],
                             ),
-                            Container(
+                          ),
+                          Positioned(
+                            left: 142,
+                            top: 0,
+                            right: 0,
+                            bottom: 0,
+                            child: Container(
                               alignment: Alignment.topLeft,
-                              width: 200,
-                              height: 162,
                               padding: EdgeInsets.all(6),
                               //color: Colors.red,
                               child: Column(
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text("Name Of Place",style: TextStyle(fontFamily: 'Poppins-Regular',fontSize: 13,color: Colors.black),),
-                                      SizedBox(width: 50),
                                       Container(
                                           alignment: Alignment.centerLeft,
                                           padding: EdgeInsets.all(4),
@@ -327,8 +343,10 @@ class _dashboardState extends State<dashboard> {
                                     ],
                                   ),
                                   const SizedBox(height: 5,),
-                                  const Text("Lorem ipsum dolor sit amet consectetur. Habitasse sit laoreet proin felis mauris vel libero........ See More",
-                                    style:  TextStyle(fontFamily: 'Poppins-Regular',fontSize: 8,color: Colors.black),),
+                                  Text("Lorem ipsum dolor sit amet consectetur. Habitasse sit laoreet proin felis mauris vel libero",
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context).textTheme.bodySmall),
                                   const SizedBox(height: 5,),
                                   const Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -344,36 +362,44 @@ class _dashboardState extends State<dashboard> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      SizedBox(
-                                        height: 35,
+                                      Expanded(
+                                        flex: 3,
                                         child: ElevatedButton(onPressed: (){},
                                           style: ButtonStyle(
                                             backgroundColor: MaterialStateProperty.all<Color>(
                                                 colorApp.colorPrimary
                                             ),
                                           ), child: const Text("Show Now",
-                                          style:  TextStyle(fontFamily: 'Poppins-Regular',fontSize: 10,color: colorApp.colorBackground),),
+                                            style:  TextStyle(fontFamily: 'Poppins-Regular',fontSize: 10,color: colorApp.colorBackground),),
                                         ),
                                       ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      OutlinedButton(onPressed: (){},
-                                        style: const ButtonStyle(
-                                            side: MaterialStatePropertyAll<BorderSide>(
-                                                BorderSide(color: colorApp.colorPrimary)
-                                            )
-                                        ), child: const Text('3.4KM',
-                                        style: TextStyle(fontFamily: 'Poppins-Regular',fontSize: 10,color: colorApp.colorPrimary),),
+                                      /*const SizedBox(
+                                          width: 5,
+                                        ),*/
+                                      SizedBox(width: 2),
+                                      Expanded(
+                                        flex: 2,
+                                        child: OutlinedButton(onPressed: (){},
+                                          style: const ButtonStyle(
+                                              side: MaterialStatePropertyAll<BorderSide>(
+                                                  BorderSide(color: colorApp.colorPrimary)
+                                              )
+                                          ), child: const Text('3.4KM',
+                                            style: TextStyle(fontFamily: 'Poppins-Regular',fontSize: 10,color: colorApp.colorPrimary),),
+                                        ),
                                       )
                                     ],
                                   )
                                 ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),//containner popluar place
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+
+                  ),//containner popluar place
                   const SizedBox(
                     height: 100,
                   ),
@@ -402,39 +428,3 @@ class ListPlace {
 
   ListPlace(this.titlePlace, this.imgPlace, this.review, this.desc);
 }
-/*
-
-*/
-
-
-/*stack*/
-/*
-* Stack(
-                              children: [
-                                Container(
-                                  child: Image(image: AssetImage("assets/images/img_2.png"),
-                                  width: 188,
-                                  height: 162
-                                  ),
-                                ),
-                                Positioned(
-                                  right: 0,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        begin: Alignment.centerLeft,
-                                        end: Alignment.centerRight,
-                                        colors: <Color>[
-                                          Color(0x1afcfcfc),
-                                          colorApp.colorBackground,
-                                          colorApp.colorBackground
-                                        ], // Gradient from https://learnui.design/tools/gradient-generator.html
-                                        tileMode: TileMode.mirror,
-                                      ),
-                                    ),
-                                    width: 80,
-                                  height: 162,
-                                  ),
-                                )
-                              ],
-                            ),*/

@@ -1,12 +1,17 @@
 import 'package:appstest/dashborad.dart';
+import 'package:appstest/grid.dart';
 import 'package:appstest/main.dart';
 import 'package:flutter/material.dart';
 import 'package:appstest/style/colors.dart';
 import 'package:iconsax/iconsax.dart';
 
 
+
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String email;
+  final String password;
+
+  const Home({required this.email, required this.password});
 
   @override
   State<Home> createState() => _HomeState();
@@ -14,7 +19,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(widget.email);
+  }
   @override
   Widget build(BuildContext context) {
     return
@@ -69,38 +79,33 @@ class _HomeState extends State<Home> {
           ),
       );
 }
-}
 
-Widget _getPage(int index) {
-  switch (index) {
-    case 0:
-      return dashboard()  ;
+  Widget _getPage(int index) {
+    switch (index) {
+      case 0:
+        return dashboard(name:widget.email)  ;
 
-    case 1:
-      return
-        Container(
-            alignment: Alignment.center,
-            color: Colors.red,
+      case 1:
+        return
+          grid();
+      case 2:
+        return
+          Container(
+              alignment: Alignment.center,
+              color: Colors.black,
 
-            child: Text('Espaces Page',
-                style: TextStyle(color: Colors.white)));
-    case 2:
-      return
-        Container(
-            alignment: Alignment.center,
-            color: Colors.black,
+              child: Text('Saves Page',
+                  style: TextStyle(color: Colors.white)));
+      case 3:
+        return
+          Container(
+              alignment: Alignment.center,
+              color: Colors.black,
 
-            child: Text('Saves Page',
-                style: TextStyle(color: Colors.white)));
-    case 3:
-      return
-        Container(
-            alignment: Alignment.center,
-            color: Colors.black,
-
-            child: Text('Profil Page',
-                style: TextStyle(color: Colors.white)));
-    default:
-      return Container();
+              child: Text('Profil Page',
+                  style: TextStyle(color: Colors.white)));
+      default:
+        return Container();
+    }
   }
 }

@@ -61,7 +61,7 @@ class _ButtonNavigationState extends State<ButtonNavigation> {
 Widget _getPage(int index) {
   switch (index) {
     case 0:
-      return dashboard()  ;
+      return dashboard(name: "Farid",)  ;
 
     case 1:
       return
