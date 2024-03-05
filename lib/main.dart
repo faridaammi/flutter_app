@@ -1,4 +1,5 @@
 import 'package:appstest/Book.dart';
+import 'package:appstest/Product.dart';
 import 'package:appstest/buttonNavigationBottom.dart';
 import 'package:appstest/home.dart';
 import 'package:appstest/signIn.dart';
@@ -33,7 +34,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
-      home: book(),
+      home: product(),
       );
   }
 }

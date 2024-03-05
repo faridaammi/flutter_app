@@ -28,6 +28,7 @@ class _signInState extends State<signIn> {
         bottom: false,
         child: Column(
           children: [
+            SizedBox(height: 40,),
             Container(
                 alignment: Alignment.topCenter,
                 padding: const EdgeInsets.all(15),

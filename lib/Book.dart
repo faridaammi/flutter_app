@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 
 class book extends StatefulWidget {
   const book({super.key});
-
   @override
   State<book> createState() => _bookState();
 }
@@ -30,31 +29,25 @@ class _bookState extends State<book> {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
-
+  void controlListner() {
+    if(_controlScroll.offset >= _controlScroll.position.maxScrollExtent &&
+    _controlScroll.position.outOfRange )
+    {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("This is max of scroll"),
+        ));
+    }
+    else{
+        print("scroll is long");
+    }
+  }
 
   @override
   void initState() {
+    _controlScroll.addListener(controlListner);
     // TODO: implement initState
     super.initState();
     getPost("");
-    _controlScroll.addListener(_scrollListner);
-
-   /* _controlScroll.addListener(() {
-      if(_controlScroll.position.pixels == _controlScroll.position.maxScrollExtent)
-      {
-        setState(() {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("This is max of scroll"),
-          ));
-        });
-      }
-      else{
-        setState(() {
-          print("scroll is long");
-        });
-      }
-    });*/
-
   }
   @override
   Widget build(BuildContext context) {
@@ -119,7 +112,7 @@ class _bookState extends State<book> {
                   controller: _controlScroll,
                   physics: const ScrollPhysics(),
                   //itemCount: posts.length,
-                  itemCount: 10,
+                  itemCount: posts.length,
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount:2,
@@ -162,10 +155,6 @@ class _bookState extends State<book> {
         ),
     );
   }
-  void _scrollListner(){
-    if(_controlScroll.position.pixels == _controlScroll.position.maxScrollExtent) {
-      print('fin scroll');
-    }
-  }
+
 }
 
